@@ -1,45 +1,98 @@
-function isEvenlyDivisible() {
+function isEvenlyDivisible(num1, num2) {
+  return !(num1 % num2);
 }
 
-function halfSquare() {
+function halfSquare(num) {
+  return num**2/2;
 }
 
-function isLong() {
+function isLong(str) {
+  return str.length >= 15;
 }
 
-function exclaim() {
+function exclaim(str) {
+  str = str.split("");
+  while(str[str.length-1] === "!"){
+    str.pop();
+  }
+  return str.join("") + "!";
 }
 
-function countWords() {
+function countWords(str) {
+  str = str.split(" ");
+  return str.length;
 }
 
-function containsDigit() {
+function containsDigit(str) {
+  for(let i = 0; i < str.length; i++){
+    if(!isNaN(str[i]) && str[i] !== " "){
+      return true;
+    }
+  }
+  return false;
 }
 
-function containsLowerCase() {
+function containsLowerCase(str) {
+  return str.toUpperCase() !== str;
 }
 
-function containsUpperCase() {
+function containsUpperCase(str) {
+  return str.toLowerCase() !== str;
 }
 
-function containsNonAlphanumeric() {
+function containsNonAlphanumeric(str) {
+  return str.replace(/\W/g, "") !== str;
 }
 
-function containsSpace() {
+function containsSpace(str) {
+  for(let i = 0; i < str.length; i++){
+    if (str[i] === " "){
+      return true;
+    }
+  }
+  return false;
 }
 
-function digits() {
+function digits(num) {
+  num = num.toString();
+  output = [];
+  for (let i = 0; i < num.length; i++){
+    if(!isNaN(num[i])){
+      output.push(Number(num[i]));
+    }
+  }
+  return output;
 }
 
-function truncate() {
+function truncate(str) {
+  if(str.length >= 15){
+    let output = "";
+    for (let i = 0; i < 8; i++){
+      output += str[i]
+    }
+    return output + "..."
+  }
+  return str;
 }
 
-function isValidPassword() {
+function isValidPassword(str) {
+  return (containsDigit(str) && 
+  containsLowerCase(str) && 
+  containsNonAlphanumeric(str) &&
+  containsUpperCase(str) && 
+  !containsSpace(str))
 }
 
-function onlyPunchy() {
+function onlyPunchy(arr) {
+  output = [];
+  for(let i = 0; i < arr.length; i++){
+    let str = exclaim(arr[i]);
+    if(!isLong(str)){
+      output.push(str);
+    }
+  }
+  return output;
 }
-
 
 module.exports = {
   isEvenlyDivisible,
